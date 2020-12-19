@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();  //router as usual
-
 //connecting to the server and all that stuff you need to do
 const client = new Client({
   cloud: {
@@ -21,7 +20,13 @@ const client = new Client({
 });
 ///https://stackoverflow.com/questions/46378266/how-to-make-nodejs-cassandra-driver-work-in-lambda
 //for some reason you only connect once and hten you don't disconnect? weird
-client.connect();
+
+
+app.get('/_ah/warmup', (req, res) => {
+    client.connect();
+});
+
+
 
 //default my house for testing purposes
 async function query(placeName = "anandaHouse") {
