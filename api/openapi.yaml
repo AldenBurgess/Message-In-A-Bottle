@@ -1,0 +1,65 @@
+
+swagger: "2.0"
+info:
+  title: Cassandra API
+  description: This lets you access cassandra
+  version: 1.0.0
+host: bottlemessage-299107.uc.r.appspot.com
+basePath: /api
+schemes:
+  - https
+
+consumes:
+- "application/json"
+produces:
+- "application/json"
+schemes:
+- "https"
+
+
+definitions:
+  Message:
+    properties:
+      postTime:
+        type: integer
+      messageText:
+        type: string
+      messageType:
+        type: string
+      placeName:
+        type: string
+    # Both properties are required
+    required:
+      - postTime
+      - messageText
+      - placeName
+
+
+paths:
+  /query/{placeName}:
+    get:
+
+      summary: Queries the database.
+      produces:
+        - "application/json"
+      parameters:
+        - in: path
+          name: query
+          required: true
+          type: json
+          minimum: 1
+          description: Will return all messages from given place.
+      responses:
+        200:
+          description: OK
+  /postStuff/:
+    post:
+      summary: posts message to database
+      parameters:
+        - in: body
+          name: Message
+          schema:
+            $ref: '#/definitions/Message'
+      responses:
+        200:
+          description: ok
