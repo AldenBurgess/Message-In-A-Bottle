@@ -18,6 +18,12 @@ class HomeText extends React.Component{
   render(){
     return (
       <div>
+      <style>{`
+          a-scene {
+            height: 300px;
+            width: 600px;
+          }
+        `}</style>
         <h3>Home</h3>
         <a-scene embedded>
           <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>

@@ -13,4 +13,9 @@ $a-tags: 'a, a:active, a:hover, a:visited';
   background-color: #fffffc;
 }
 
+a-scene {
+  height: 300px;
+  width: 600px;
+}
+
 @import "~bootstrap/scss/bootstrap";
