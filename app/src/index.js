@@ -10,6 +10,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import MessageAdd from './addMessage.js';
 import reportWebVitals from './reportWebVitals';
 import 'aframe';
+import 'aframe-text-geometry-component';
 
 class HomeText extends React.Component{
   constructor (){
@@ -43,11 +44,16 @@ class HomeText extends React.Component{
               id="starModel"
               src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fstar.obj?v=1608431110249"
             ></a-asset-item>
+            <a-asset-item 
+              id="optimerBoldFont" 
+              src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"
+            ></a-asset-item>
             <img
               id="street"
               src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2F3648043829_6e7c932c90_o.jpg?v=1608439608237"
             />
           </a-assets>
+          <a-entity id="message-text" text-geometry="value: ... ; font: #optimerBoldFont"></a-entity>
           <a-obj-model
             src="#pointModel"
             color="green"
@@ -167,6 +173,11 @@ class Page extends React.Component {
     )
   }
 }
+
+// function MessageToAR(message){
+//   textField = getElementById(message-field)
+//   textField.setAttribute('value', message)
+// }
 
 ReactDOM.render(
   <React.StrictMode>
