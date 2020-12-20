@@ -26,11 +26,38 @@ class HomeText extends React.Component{
         `}</style>
         <h3>Home</h3>
         <a-scene embedded>
-          <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-          <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-          <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-          <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-          <a-sky color="#ECECEC"></a-sky>
+        <a-assets>
+            <a-asset-item
+              id="heartModel"
+              src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fheart.obj?v=1608431131171"
+            ></a-asset-item>
+            <a-asset-item
+              id="pointModel"
+              src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fexclamation-point.obj?v=1608431137574"
+            ></a-asset-item>
+            <a-asset-item
+              id="markModel"
+              src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fquestion-mark.obj?v=1608431115714"
+            ></a-asset-item>
+            <a-asset-item
+              id="starModel"
+              src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fstar.obj?v=1608431110249"
+            ></a-asset-item>
+            <img
+              id="street"
+              src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2F3648043829_6e7c932c90_o.jpg?v=1608439608237"
+            />
+          </a-assets>
+          <a-obj-model
+            src="#pointModel"
+            color="green"
+            rotation="-90 0 0"
+            position="-1 2.5 -10"
+            scale=".2 .2 .2"
+          ></a-obj-model>
+          <a-entity text="value:Hello World" position="5 5 5" rotation="0 0 0" scale="4 4 4" visible="true"></a-entity>
+          <a-sky src="#street"> </a-sky>
+          <a-entity event-set__display="_event: click; visable: true"></a-entity>
         </a-scene>
       </div>
     )
