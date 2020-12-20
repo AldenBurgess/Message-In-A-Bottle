@@ -61,7 +61,7 @@ class HomeText extends React.Component{
             position="-1 2.5 -10"
             scale=".2 .2 .2"
           ></a-obj-model>
-          <a-entity text="value:Hello World" position="5 5 5" rotation="0 0 0" scale="4 4 4" visible="true"></a-entity>
+
           <a-sky src="#street"> </a-sky>
           <a-entity event-set__display="_event: click; visable: true"></a-entity>
         </a-scene>
