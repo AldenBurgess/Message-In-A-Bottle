@@ -49,9 +49,6 @@ function postRequest(messageText, messageType, placeName){
   const req = https.request(options, res => {
     console.log(`statusCode: ${res.statusCode}`)
 
-    res.on('data', d => {
-      process.stdout.write(d)
-    })
   })
 
   req.on('error', error => {
@@ -62,6 +59,5 @@ function postRequest(messageText, messageType, placeName){
   req.end()
 }
 
-postRequest("Hi my name's ananda", "hearts", "anandaHouse")
 exports.getRequest = getRequest
 exports.postRequest = postRequest

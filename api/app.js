@@ -45,7 +45,7 @@ async function insertInto(messageText, postTime, messageType, placeName){
   //https://stackoverflow.com/questions/31822891/how-to-build-dynamic-query-by-binding-parameters-in-node-js-sql implement in the morning
   //alright boys its time not to do that.
   console.log("insertion")
-  await client.execute("INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', "+postTime+", '"+messageType+"', '"+placeName+"');");
+  await client.execute("INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"', '"+placeName+"');");
     //"INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"','"+placeName+"');");
 }
 
