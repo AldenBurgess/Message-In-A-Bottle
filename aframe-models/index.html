@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>stl Model - A-Frame School</title>
+    <meta name="description" content="stl Model - A-Frame School" />
+    <script src="https://rawgit.com/aframevr/aframe/b395ea0/dist/aframe-master.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item
+          id="heartModel"
+          src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fheart.obj?v=1608431131171"
+        ></a-asset-item>
+        <a-asset-item
+          id="pointModel"
+          src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fexclamation-point.obj?v=1608431137574"
+        ></a-asset-item>
+        <a-asset-item
+          id="markModel"
+          src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fquestion-mark.obj?v=1608431115714"
+        ></a-asset-item>
+        <a-asset-item
+          id="starModel"
+          src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2Fstar.obj?v=1608431110249"
+        ></a-asset-item>
+        <img
+          id="street"
+          src="https://cdn.glitch.com/9df1a04f-7acf-4b5c-b996-5417587c3844%2F3648043829_6e7c932c90_o.jpg?v=1608439608237"
+        />
+      </a-assets>
+      <!--       <a-obj-model
+        src="#heartModel"
+        color="red"
+        rotation="45 180 0"
+        position="-1 1 -10"
+        scale=".015 .015 .015"
+      ></a-obj-model> -->
+      <!--       <a-obj-model
+        src="#starModel"
+        color="yellow"
+        rotation="-90 0 0"
+        position="1 -2 -10"
+        scale=".1 .1 .1"
+      ></a-obj-model> -->
+      <a-obj-model
+        src="#pointModel"
+        color="green"
+        rotation="-90 0 0"
+        position="-1 2.5 -10"
+        scale=".2 .2 .2"
+      ></a-obj-model>
+      <!--       <a-obj-model
+        src="#markModel"
+        color="blue"
+        rotation="-90 0 0"
+        position="-50 -50 -75"
+        scale="1 1 1"
+      ></a-obj-model> -->
+      <a-sky src="#street"> </a-sky>
+      <a-entity event-set__display="_event: click; visable: true"></a-entity>
+      <script>
+        AFRAME.registerComponent("handle-events", {
+          init: function() {
+            var el = this.el; // <a-box>
+            el.addEventListener("mouseenter", function() {
+              el.setAttribute("color", "#24CAFF");
+            });
+            el.addEventListener("mouseleave", function() {
+              el.setAttribute("color", "#EF2D5E");
+            });
+            el.addEventListener("click", function() {
+              el.setAttribute("scale", { x: 2, y: 1, z: 2 });
+            });
+          }
+        });
+      </script>
+      <a-camera><a-cursor></a-cursor></a-camera>
+    </a-scene>
+  </body>
+</html>
