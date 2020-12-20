@@ -13,41 +13,4 @@ $a-tags: 'a, a:active, a:hover, a:visited';
   background-color: #fffffc;
 }
 
-.react-calendar__navigation {
-  font-size: 20px;
-  .react-calendar__navigation__label {
-    padding: 10px;
-    border: 0px;
-  }
-  .react-calendar__navigation__arrow {
-    border: 0px;
-  }
-}
-.react-calendar__tile{
-  height: 60px;
-  padding: 10px;
-  border: 0px;
-}
-.react-calendar__tile--active{
-  background-color: $secondary;
-  border: 0px;
-  border-radius: 0px;
-  color: #fffffc;
-}
-.react-calendar{
-  border: 0px
-}
-.react-calendar__tile:hover {
-  background-color: white;
-}
-.react-calendar__tile--active:hover {
-  background-color: $secondary;
-}
-.specialDate {
-  background-color: $secondary;
-}
-.react-calendar__tile--active .specialDate {
-  background-color: $secondary;
-  color: #fffffc;
-}
 @import "~bootstrap/scss/bootstrap";
