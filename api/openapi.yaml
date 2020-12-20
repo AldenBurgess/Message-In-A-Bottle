@@ -21,7 +21,7 @@ definitions:
   Message:
     properties:
       postTime:
-        type: integer
+        type: string
       messageText:
         type: string
       messageType:
@@ -39,7 +39,7 @@ definitions:
 
 
 paths:
-  /query/{placeName}:
+  api/query/{placeName}:
     get:
 
       summary: Queries the database.
@@ -55,7 +55,7 @@ paths:
       responses:
         200:
           description: OK
-  /postStuff/:
+  api/postStuff/:
     post:
       summary: posts message to database
       parameters:

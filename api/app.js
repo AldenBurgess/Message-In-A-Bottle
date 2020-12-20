@@ -15,7 +15,6 @@ var corsOptions = {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var port = process.env.PORT || 8080;        // set our port
-var router = express.Router();  //router as usual
 //connecting to the server and all that stuff you need to do
 const client = new Client({
   cloud: {
@@ -50,19 +49,33 @@ async function insertInto(messageText, postTime, messageType, placeName){
     //"INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"','"+placeName+"');");
 }
 
+app.options('/api/query/:placeName', function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.end();
+});
+
+
+app.options('/api/postStuff', function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.end();
+});
+
 //get stuff for user. have conversation with alden about how to get place name
-router.get('/query/:placeName', cors(corsOptions), async function(req, res) {
+app.get('/api/query/:placeName', cors(corsOptions), async function(req, res) {
     const queryInfo = await query(req.params.placeName);
     await res.json(queryInfo);
 });
 //
-router.post('/postStuff', cors(corsOptions), async function(req, res){
+app.post('/api/postStuff', cors(corsOptions), async function(req, res){
   //use await in front of insertInto???
-  insertInto(req.body.messageText, req.body.postTime, req.body.placeName);
+  insertInto(req.body.messageText, req.body.postTime, req.body.messageType, req.body.placeName);
   await res.json({worked:"yes"});
 });
 ///make it use /api whenever using router routes
-app.use('/api', router);
 app.listen(port);
 
 //getting moving. https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4

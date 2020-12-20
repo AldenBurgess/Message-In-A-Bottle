@@ -26,12 +26,13 @@ function getRequest(placeName){
 //this is how to make a post request to the api
 function postRequest(messageText, messageType, placeName){
   var date = new Date();
-  var newDate = date.toString();
+  var newDate = date.toISOString().split('T')[0]
+  console.log(newDate)
   const data = JSON.stringify({
     messageText:messageText,
     postTime: newDate,
-    messageType: messageType,
-    placeName: placeName
+    placeName: placeName,
+    messageType: messageType
   })
 
   const options = {
@@ -61,4 +62,6 @@ function postRequest(messageText, messageType, placeName){
   req.end()
 }
 
-export {getRequest, postRequest};
+postRequest("Hi my name's ananda", "hearts", "anandaHouse")
+exports.getRequest = getRequest
+exports.postRequest = postRequest
