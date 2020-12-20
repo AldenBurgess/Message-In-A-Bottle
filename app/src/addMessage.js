@@ -11,7 +11,6 @@ class MessageAdd extends React.Component{
     super(props);
   }
 
-
   handleSubmit(event){
     event.preventDefault();
     const formData = new FormData(event.target),

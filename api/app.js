@@ -1,9 +1,16 @@
 const { Client } = require("cassandra-driver");
 //ofc express
 const express = require('express');
+var cors = require('cors')
 const app = express();
 //need this in order to make req work right
 var bodyParser = require('body-parser');
+
+app.use(cors())
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -43,16 +50,15 @@ async function insertInto(messageText, postTime, messageType, placeName){
 }
 
 //get stuff for user. have conversation with alden about how to get place name
-router.get('/query/:placeName', async function(req, res) {
+router.get('/query/:placeName', cors(corsOptions), async function(req, res) {
     const queryInfo = await query(req.params.placeName);
     await res.json(queryInfo);
 });
 //
-router.post('/postStuff', async function(req, res){
+router.post('/postStuff', cors(corsOptions), async function(req, res){
   //use await in front of insertInto???
   insertInto(req.body.messageText, req.body.postTime, req.body.placeName);
-  const queryInfo = await query(req.params.placeName);
-  await res.json({queryInfo, reqBody:req.body, waited:"yes"});
+  await res.json({worked:"yes"});
 });
 ///make it use /api whenever using router routes
 app.use('/api', router);
