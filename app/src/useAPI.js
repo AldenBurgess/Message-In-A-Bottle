@@ -4,7 +4,7 @@ const https = require('https')
 
 function getRequest(placeName){
   const options = {
-    hostname: 'cassandra-api.bottlemessage-299107.uc.r.appspot.com',
+    hostname: 'bottlemessage-299107.uc.r.appspot.com',
     port: 443,
     path: '/api/query/'+placeName,
     method: 'GET'
@@ -35,7 +35,7 @@ function postRequest(messageText, messageType, placeName){
   })
 
   const options = {
-    hostname: 'cassandra-api.bottlemessage-299107.uc.r.appspot.com',
+    hostname: 'bottlemessage-299107.uc.r.appspot.com',
     port: 443,
     path: '/api/postStuff',
     method: 'POST',

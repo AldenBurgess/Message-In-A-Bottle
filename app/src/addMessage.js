@@ -11,25 +11,27 @@ class MessageAdd extends React.Component{
     super(props);
   }
 
+
   handleSubmit(event){
     event.preventDefault();
     const formData = new FormData(event.target),
     formDataObj = Object.fromEntries(formData.entries())
     //console.log("egg aaa fuck oh jeezx oh shit")
-    console.log(formDataObj)
-    //find nearest geofence to the user and then they can access messages from that person.
     Radar.initialize("prj_test_pk_d65e98b983fe32401d19717c4c222098ee35251a ");
     Radar.searchGeofences({
       radius: 1000,
-      //we only have 2 types of places rn lol.
-      tags: ['userAddress', 'college'],
-      limit: 1
+      tags: ['userAddress','college'],
+      limit: 10
     }, function(err, result) {
       if (!err) {
-        placeName = result[0]["externalId"]
+        if (result.geofences.length>0){
+          //what the fuck why am I getting goddamn security errors what the fuck
+          Cassandra.postRequest(formDataObj["messageText"], formDataObj["messageType"], result.geofences[0]["externalId"]);
+        }else {
+          console.log("add to dom telling user there is problem - ask alden how to do.");
+        }
       }
     });
-    console.log(formDataObj["message"], formDataObj[])
   }
 
   render(){
