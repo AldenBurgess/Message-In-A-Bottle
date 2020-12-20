@@ -1,3 +1,4 @@
+service: cassandra-api
 runtime: nodejs14
 inbound_services:
 - warmup
