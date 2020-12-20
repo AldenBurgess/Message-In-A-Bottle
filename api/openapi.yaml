@@ -28,11 +28,14 @@ definitions:
         type: string
       placeName:
         type: string
+      messageType:
+        type: string
     # Both properties are required
     required:
       - postTime
       - messageText
       - placeName
+      - messageType
 
 
 paths:

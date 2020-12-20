@@ -37,7 +37,9 @@ async function query(placeName = "anandaHouse") {
 async function insertInto(messageText, postTime, messageType, placeName){
   //alright boys, time to build anti sql injection technology
   //https://stackoverflow.com/questions/31822891/how-to-build-dynamic-query-by-binding-parameters-in-node-js-sql implement in the morning
-  await client.execute("INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"',"+placeName+"');");
+  console.log("insertion")
+  await client.execute("INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', "+postTime+", '"+messageType+"', '"+placeName+"');");
+    //"INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"','"+placeName+"');");
 }
 
 //get stuff for user. have conversation with alden about how to get place name
@@ -47,10 +49,14 @@ router.get('/query/:placeName', async function(req, res) {
 });
 //
 router.post('/postStuff', async function(req, res){
+  //use await in front of insertInto???
   insertInto(req.body.messageText, req.body.postTime, req.body.placeName);
+  const queryInfo = await query(req.params.placeName);
+  await res.json({queryInfo, reqBody:req.body, waited:"yes"});
 });
 ///make it use /api whenever using router routes
 app.use('/api', router);
 app.listen(port);
+
 //getting moving. https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
 console.log('working on port ' + port);
