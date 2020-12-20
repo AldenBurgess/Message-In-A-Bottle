@@ -2,27 +2,30 @@
 var bodyParser = require('body-parser');
 const https = require('https')
 
-function getRequest(placeName){
-  const options = {
-    hostname: 'cassandra-api-dot-bottlemessage-299107.uc.r.appspot.com',
-    port: 443,
-    path: '/api/query/'+placeName,
-    method: 'GET'
-  }
+// function getRequest(placeName){
+//   const options = {
+//     hostname: 'cassandra-api-dot-bottlemessage-299107.uc.r.appspot.com',
+//     port: 443,
+//     path: '/api/query/'+placeName,
+//     method: 'GET'
+//   }
+//   //why the fuck do I need to do it this stupid ass way
+//   callback = function(res) {
+//     var str
+//     res.on('data', function(chunk){
+//       process.stdout.write(chunk)
+//       console.log("\n\n")
+//       if (chunk !="undefined"){
+//         str+=chunk
+//       }
+//     })
+//     res.on('end', function(){
+//       console.log(str)
+//     })
+//   };
+//   var req = https.request(options, callback).end();
+// }
 
-  const req = https.request(options, res => {
-    console.log(`statusCode: ${res.statusCode}`)
-
-    res.on('data', d => {
-      process.stdout.write(d)
-    })
-  })
-
-  req.on('error', error => {
-    console.error(error)
-  })
-  req.end()
-}
 //this is how to make a post request to the api
 function postRequest(messageText, messageType, placeName){
   var date = new Date();
@@ -59,5 +62,5 @@ function postRequest(messageText, messageType, placeName){
   req.end()
 }
 
-exports.getRequest = getRequest
+//exports.getRequest = getRequest
 exports.postRequest = postRequest
