@@ -1,14 +1,20 @@
 const { Client } = require("cassandra-driver");
 //ofc express
 const express = require('express');
+var cors = require('cors')
 const app = express();
 //need this in order to make req work right
 var bodyParser = require('body-parser');
 
+app.use(cors())
+var corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 var port = process.env.PORT || 8080;        // set our port
-var router = express.Router();  //router as usual
 //connecting to the server and all that stuff you need to do
 const client = new Client({
   cloud: {
@@ -37,25 +43,39 @@ async function query(placeName = "anandaHouse") {
 async function insertInto(messageText, postTime, messageType, placeName){
   //alright boys, time to build anti sql injection technology
   //https://stackoverflow.com/questions/31822891/how-to-build-dynamic-query-by-binding-parameters-in-node-js-sql implement in the morning
+  //alright boys its time not to do that.
   console.log("insertion")
-  await client.execute("INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', "+postTime+", '"+messageType+"', '"+placeName+"');");
+  await client.execute("INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"', '"+placeName+"');");
     //"INSERT INTO messages.messagedb (messageText, postTime, messageType, placeName) VALUES ('"+messageText+"', '"+postTime+"', '"+messageType+"','"+placeName+"');");
 }
 
+app.options('/api/query/:placeName', function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.end();
+});
+
+
+app.options('/api/postStuff', function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.end();
+});
+
 //get stuff for user. have conversation with alden about how to get place name
-router.get('/query/:placeName', async function(req, res) {
+app.get('/api/query/:placeName', cors(corsOptions), async function(req, res) {
     const queryInfo = await query(req.params.placeName);
     await res.json(queryInfo);
 });
 //
-router.post('/postStuff', async function(req, res){
+app.post('/api/postStuff', cors(corsOptions), async function(req, res){
   //use await in front of insertInto???
-  insertInto(req.body.messageText, req.body.postTime, req.body.placeName);
-  const queryInfo = await query(req.params.placeName);
-  await res.json({queryInfo, reqBody:req.body, waited:"yes"});
+  insertInto(req.body.messageText, req.body.postTime, req.body.messageType, req.body.placeName);
+  await res.json({worked:"yes"});
 });
 ///make it use /api whenever using router routes
-app.use('/api', router);
 app.listen(port);
 
 //getting moving. https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4

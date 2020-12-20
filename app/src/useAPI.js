@@ -4,7 +4,7 @@ const https = require('https')
 
 function getRequest(placeName){
   const options = {
-    hostname: 'cassandra-api.bottlemessage-299107.uc.r.appspot.com',
+    hostname: 'cassandra-api-dot-bottlemessage-299107.uc.r.appspot.com',
     port: 443,
     path: '/api/query/'+placeName,
     method: 'GET'
@@ -26,16 +26,17 @@ function getRequest(placeName){
 //this is how to make a post request to the api
 function postRequest(messageText, messageType, placeName){
   var date = new Date();
-  var newDate = date.toString();
+  var newDate = date.toISOString().split('T')[0]
+  console.log(newDate)
   const data = JSON.stringify({
     messageText:messageText,
     postTime: newDate,
-    messageType: messageType,
-    placeName: placeName
+    placeName: placeName,
+    messageType: messageType
   })
 
   const options = {
-    hostname: 'cassandra-api.bottlemessage-299107.uc.r.appspot.com',
+    hostname: 'cassandra-api-dot-bottlemessage-299107.uc.r.appspot.com',
     port: 443,
     path: '/api/postStuff',
     method: 'POST',
@@ -48,9 +49,6 @@ function postRequest(messageText, messageType, placeName){
   const req = https.request(options, res => {
     console.log(`statusCode: ${res.statusCode}`)
 
-    res.on('data', d => {
-      process.stdout.write(d)
-    })
   })
 
   req.on('error', error => {
@@ -61,4 +59,5 @@ function postRequest(messageText, messageType, placeName){
   req.end()
 }
 
-export {getRequest, postRequest};
+exports.getRequest = getRequest
+exports.postRequest = postRequest

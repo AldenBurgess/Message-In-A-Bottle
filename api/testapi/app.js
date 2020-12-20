@@ -74,4 +74,5 @@ function postRequest(messageText, messageType, placeName){
   req.end()
 }
 getRequest('anandaHouse')
+postRequest('hi', 'hearts', 'anandaHouse')
 app.listen(port);
