@@ -21,9 +21,6 @@ function App() {
           </a-scene>
         </div>
       </header>
-    <div>
-
-      </div>
     </div>
   );
 }
