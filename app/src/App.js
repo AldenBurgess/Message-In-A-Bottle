@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import React from "react"
 import 'aframe';
-import {Entity, Scene} from 'aframe-react';
+//import {Entity, Scene} from 'aframe-react';
 import ReactDOM from 'react-dom';
 import './App.css';
 //import MessageAdd from './addMessage.js';

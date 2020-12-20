@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './Site.scss';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Tab from 'react-bootstrap/Tab';
+import Nav from 'react-bootstrap/Nav';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import MessageAdd from './addMessage.js';
 import reportWebVitals from './reportWebVitals';
 
 class HomeText extends React.Component{
