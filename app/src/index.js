@@ -21,6 +21,21 @@ class HomeText extends React.Component{
   }
 }
 
+class FormText extends React.Component{
+  constructor (){
+    super();
+  }
+  render(){
+    return (
+      <div>
+        <h3>Input your note</h3>
+        <MessageAdd />
+      </div>
+    )
+  }
+}
+
+
 class AboutText extends React.Component{
   constructor (){
     super();
@@ -29,8 +44,10 @@ class AboutText extends React.Component{
     return (
       <div>
         <h1>About</h1>
-        <p>Notes in Space is an interactive web experience wherein users can find and leave notes in AR for people in their
-        vicinity. </p>
+        <p>Notes in Space is an interactive web experience wherein users can find and leave notes in VR/AR for people in their
+        vicinity. Development is ongoing for HackUmass 2020. The frontend was built in React, Bootstrap and <a href="https://aframe.io/">a-frame.io</a>. User location was obtained using <a href="https://radar.io">radar.io</a>.
+        The backend was built in Node.js and hosted as a separate API deployed to Google Cloud App Engine which queried our Datastax Cassandra database.
+        </p>
       </div>
     )
   }
@@ -53,6 +70,9 @@ class Tabs extends React.Component {
               <Nav.Item>
                 <Nav.Link eventKey="about">About</Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="form">Form</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
@@ -62,6 +82,9 @@ class Tabs extends React.Component {
               </Tab.Pane>
               <Tab.Pane eventKey="about">
                 <AboutText />
+              </Tab.Pane>
+              <Tab.Pane eventKey="form">
+                <FormText />
               </Tab.Pane>
             </Tab.Content>
           </Col>
